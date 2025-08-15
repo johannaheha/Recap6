@@ -41,6 +41,14 @@ export default function DetailsPage() {
 
   async function deletePlace() {
     console.log("Deleting place ...");
+
+    const response = await fetch(`/api/places/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      router.push("/");
+    }
   }
 
   return (

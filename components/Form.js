@@ -40,6 +40,7 @@ export default function Form({ onSubmit, formName, defaultData }) {
     <FormContainer aria-labelledby={formName} onSubmit={handleSubmit}>
       <Label htmlFor="name">Name</Label>
       <Input
+        required
         id="name"
         name="name"
         type="text"
@@ -47,6 +48,7 @@ export default function Form({ onSubmit, formName, defaultData }) {
       />
       <Label htmlFor="image-url">Image Url</Label>
       <Input
+        required
         id="image-url"
         name="image"
         type="text"
@@ -54,6 +56,7 @@ export default function Form({ onSubmit, formName, defaultData }) {
       />
       <Label htmlFor="location">Location</Label>
       <Input
+        required
         id="location"
         name="location"
         type="text"
@@ -61,6 +64,7 @@ export default function Form({ onSubmit, formName, defaultData }) {
       />
       <Label htmlFor="map-url">Map Url</Label>
       <Input
+        required
         id="map-url"
         name="mapURL"
         type="text"
@@ -68,6 +72,7 @@ export default function Form({ onSubmit, formName, defaultData }) {
       />
       <Label htmlFor="description">Description</Label>
       <Textarea
+        required
         name="description"
         id="description"
         cols="30"
