@@ -80,6 +80,7 @@ export default function DetailsPage() {
           Delete
         </StyledButton>
       </ButtonContainer>
+      <Comments />
     </>
   );
 }

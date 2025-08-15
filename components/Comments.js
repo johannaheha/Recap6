@@ -31,6 +31,8 @@ export default function Comments({ locationName }) {
     error,
   } = useSWR(`/api/comments/${id}`);
 
+  console.log(comments);
+
   if (!isReady || isLoading || error) return <h2>Loading...</h2>;
 
   async function handleSubmitComment(event) {
