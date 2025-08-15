@@ -1,8 +1,15 @@
-import { comments } from "../../../../lib/db_comments.js";
+import Comment from "@/db/models/Comment";
+import dbConnect from "@/db/connect";
 
-export default function handler(request, response) {
+export default async function handler(request, response) {
+  await dbConnect();
+
   const { id } = request.query;
-  const foundComments = comments.filter(({ placeId }) => placeId === id);
-  response.status(200).json(foundComments);
-  return;
+
+  if (request.method === "GET") {
+    const foundComments = await Comment.find({ placeId: id });
+    return response.status(200).json(foundComments);
+  }
+
+  response.status(405).json({ status: "Method not allowed." });
 }
