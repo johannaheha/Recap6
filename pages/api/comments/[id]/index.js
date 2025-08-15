@@ -11,6 +11,15 @@ export default async function handler(request, response) {
     return response.status(200).json(foundComments);
   }
 
+  if (request.method === "POST") {
+    const commentData = request.body;
+    commentData.placeId = id;
+    await Comment.create(commentData);
+
+    response.status(201).json({ status: "Comment created." });
+    return;
+  }
+
   if (request.method === "DELETE") {
     const deleted = await Comment.findByIdAndDelete(id);
     response.status(200).json({ status: "Comment successfully deleted" });
