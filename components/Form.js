@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { StyledButton } from "./StyledButton";
+import useSWR from "swr";
+import { useState } from "react";
 
 export const FormContainer = styled.form`
   display: grid;
@@ -25,6 +27,8 @@ export const Label = styled.label`
 `;
 
 export default function Form({ onSubmit, formName, defaultData }) {
+  const [isEditMode, setIsEditMode] = useState(false);
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -70,7 +74,12 @@ export default function Form({ onSubmit, formName, defaultData }) {
         rows="10"
         defaultValue={defaultData?.description}
       ></Textarea>
-      <StyledButton type="submit">
+      <StyledButton
+        type="submit"
+        onClick={() => {
+          setIsEditMode(!isEditMode);
+        }}
+      >
         {defaultData ? "Update place" : "Add place"}
       </StyledButton>
     </FormContainer>
