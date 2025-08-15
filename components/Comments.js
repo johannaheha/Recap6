@@ -51,6 +51,7 @@ export default function Comments({ locationName }) {
 
     if (response.ok) {
       mutate();
+      event.target.reset();
     }
   }
 
