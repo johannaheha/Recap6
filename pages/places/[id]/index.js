@@ -80,7 +80,7 @@ export default function DetailsPage() {
           Delete
         </StyledButton>
       </ButtonContainer>
-      <Comments />
+      <Comments locationName={place.name} />
     </>
   );
 }

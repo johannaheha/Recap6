@@ -5,7 +5,7 @@ const commentSchema = new Schema({
   id: { type: String, required: true },
   name: { type: String, required: true },
   comment: { type: String, required: true },
-  placeId: { type: [Schema.Types.ObjectId], ref: "Place" },
+  placeId: { type: String, required: true },
 });
 
 const Comment =
