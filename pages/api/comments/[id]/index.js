@@ -12,9 +12,8 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "DELETE") {
-    await Comment.findByIdAndDelete(id);
-
-    response.status(200).json({ status: `Comment successfully deleted.` });
+    const deleted = await Comment.findByIdAndDelete(id);
+    response.status(200).json({ status: "Comment successfully deleted" });
   }
 
   response.status(405).json({ status: "Method not allowed." });
