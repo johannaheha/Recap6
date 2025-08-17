@@ -31,17 +31,37 @@ export default function Comments({ locationName }) {
     error,
   } = useSWR(`/api/comments/${id}`);
 
-  console.log(comments);
-
   if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+
+  console.log(comments);
 
   async function handleSubmitComment(event) {
     event.preventDefault();
     console.log("adding comment");
+
+    const commentData = new FormData(event.target);
+    const data = Object.fromEntries(commentData);
+    const response = await fetch(`/api/comments/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      mutate();
+      event.target.reset();
+    }
   }
 
   async function handleDeleteComment(comment_id) {
     console.log("deleting comment");
+
+    const response = await fetch(`/api/comments/${comment_id}`, {
+      method: "DELETE",
+    });
+    await mutate();
   }
 
   return (

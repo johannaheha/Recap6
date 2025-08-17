@@ -1,5 +1,6 @@
 import dbConnect from "@/db/connect";
 import Place from "@/db/models/Place";
+import Comment from "@/db/models/Comment";
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -26,8 +27,14 @@ export default async function handler(request, response) {
 
   if (request.method === "DELETE") {
     await Place.findByIdAndDelete(id);
+    const deleteResponse = await Comment.deleteMany({ placeId: id });
+    //Löscht alle Kommentare mit placeId
 
-    response.status(200).json({ status: `Place successfully deleted.` });
+    response.status(200).json({
+      status: `Place successfully deleted.`,
+      commentsDeleted: deleteResponse.deletedCount,
+      // in Response: Anzahl der gelöschten Objekte
+    });
   }
 
   response.status(405).json({ status: "method not allowed" });
