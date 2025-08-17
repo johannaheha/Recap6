@@ -21,7 +21,7 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "DELETE") {
-    const deleted = await Comment.findByIdAndDelete(id);
+    await Comment.findByIdAndDelete(id);
     response.status(200).json({ status: "Comment successfully deleted" });
   }
 
